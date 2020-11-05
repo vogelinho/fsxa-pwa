@@ -32,6 +32,8 @@ FSXA_REMOTES= ...
 FSXA_TENANT_ID=...
 ```
 
+ToDo: is FSXA_REMOTES properly described? Obviously it is not required
+
 ### How to run dev and build mode
 
 ```bash
@@ -55,9 +57,13 @@ The pattern-library is referenced in two entry points.
 
 ### /src/pages/\_.tsx
 
+ToDo: does not exist anymore. The replacement might be  ./dist/fsxa/IndexPage.vue
+
 The page structure in nuxt is mapped via files and folders inside of the pages folder. To leave the routing decision all requests are mapped to the generic IndexPage (\_.tsx) file. This will pass the current route to the FSXAPage. If the FSXAPage decides that a route-change is needed it will call the provided callback `handleRouteChange` with the next route and the IndexPage will pass it through the the router that is embedded in nuxt.
 
 ### /src/store/fsxa.ts
+
+ToDo: does not exist anymore
 
 The pattern-library is using Vuex in the background to be able to provide a working server-side-rendering mechanism. All fetched data is stored in the Vuex Store and is passed to the Client after hydration. Since Vuex is already included and setup in nuxt, we need to add the vuex-store-module provided by the pattern-library to the existing one. This is done via adding the file `fsxa.ts`. It exports the store, actions, getters and mutations used inside of the pattern-library. The module itself is prefixing every action and getter with `fsxa` so that there are no unwanted name clashes.
 
