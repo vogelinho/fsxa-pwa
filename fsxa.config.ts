@@ -1,5 +1,5 @@
 export default {
-  devMode: false,
+  devMode: true,
   sections: '~/components/fsxa/sections',
   layouts: '~/components/fsxa/layouts',
   mapDataQuery: (query) => {
