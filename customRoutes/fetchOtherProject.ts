@@ -1,9 +1,9 @@
 import { FSXAApi, FSXAContentMode } from 'fsxa-api'
-import express from 'express'
+import express, { Request, Response } from 'express'
+// eslint-disable-next-line import/named
+import { FSXAMiddlewareContext } from 'fsxa-nuxt-module'
 const expressIntegration = require('fsxa-api/dist/lib/integrations/express')
   .default
-
-const router = express.Router()
 
 const enterpriseDev = new FSXAApi(FSXAContentMode.PREVIEW, {
   mode: 'remote',
@@ -27,10 +27,12 @@ const enterprisePatchday = new FSXAApi(FSXAContentMode.PREVIEW, {
   }
 })
 
-router.use('/dev', expressIntegration({ api: enterpriseDev }))
-router.use('/patchday', expressIntegration({ api: enterprisePatchday }))
-
 export default {
-  router,
+  async handler(context: FSXAMiddlewareContext, req: Request, res: Response) {
+    const app = express()
+    app.use('/dev', expressIntegration({ api: enterpriseDev }))
+    app.use('/patchday', expressIntegration({ api: enterprisePatchday }))
+    return app(req, res)
+  },
   route: '/projects'
 }
