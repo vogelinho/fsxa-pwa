@@ -30,13 +30,13 @@ jobs:
     - name: Build
       run: npm run generate
       env:
-        FSXA_API_KEY: API_KEY
-        FSXA_CAAS: FSXA_CAAS
-        FSXA_MODE: FSXA_MODE
-        FSXA_NAVIGATION_SERVICE: FSXA_NAVIGATION_SERVICE
-        FSXA_LOCALE: FSXA_LOCALE
-        FSXA_TENANT_ID: FSXA_TENANT_ID
-        FSXA_PROJECT_ID: FSXA_PROJECT_ID
+        FSXA_API_KEY: ${{ secrets.API_KEY }}
+        FSXA_CAAS: ${{ secrets.FSXA_CAAS }}
+        FSXA_MODE: ${{ secrets.FSXA_MODE }}
+        FSXA_NAVIGATION_SERVICE: ${{ secrets.FSXA_NAVIGATION_SERVICE }}
+        FSXA_LOCALE: ${{ secrets.FSXA_LOCALE }}
+        FSXA_TENANT_ID: ${{ secrets.FSXA_TENANT_ID }}
+        FSXA_PROJECT_ID: ${{ secrets.FSXA_PROJECT_ID }}
 
     - name: Deploy
       uses: JamesIves/github-pages-deploy-action@4.1.1
