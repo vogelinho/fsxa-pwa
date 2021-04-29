@@ -1,6 +1,7 @@
 {
   "name": "fsxa-pwa",
   "short_name": "fsxa-pwa",
+  "description": "Demo PWA built with FSXA",
   "icons": [
     {
       "src": "/_nuxt/icons/icon_64x64.5f6a36.png",
