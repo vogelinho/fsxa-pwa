@@ -3,6 +3,7 @@ import { Configuration } from '@nuxt/types/config'
 
 const config: Configuration = {
   ssr: true,
+  target: 'static',
   /*
    ** Headers of the page
    */

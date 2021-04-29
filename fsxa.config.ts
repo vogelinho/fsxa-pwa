@@ -1,6 +1,5 @@
 export default {
   devMode: false,
-  defaultLocale: 'de_DE',
   components: {
     sections: '~/components/fsxa/sections',
     layouts: '~/components/fsxa/layouts',
@@ -8,5 +7,7 @@ export default {
     appLayout: '~/components/fsxa/AppLayout',
     loader: '~/components/fsxa/Loader'
   },
-  customRoutes: '~/customRoutes'
+  defaultLocale: 'en_GB',
+  customRoutes: '~/customRoutes',
+  availableLocales: ['de_DE', 'en_GB']
 }

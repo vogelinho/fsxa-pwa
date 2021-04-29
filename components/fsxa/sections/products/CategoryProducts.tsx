@@ -29,16 +29,6 @@ class CategoryProducts extends FSXABaseSection<Payload> {
     }
   }
 
-  // TODO: this function is for backwards compatibility, remove it if backwards compatibility is no longer required
-  getFilterKey(categoryString: string): string {
-    const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$/
-    if (uuidRegex.test(categoryString)) {
-      return 'formData.tt_categories.value.identifier'
-    } else {
-      return 'formData.tt_categories.value.label'
-    }
-  }
-
   async fetchProducts() {
     const params: QueryBuilderQuery[] = [
       {
@@ -54,7 +44,7 @@ class CategoryProducts extends FSXABaseSection<Payload> {
     ]
     if (this.payload.filterParams.category) {
       params.push({
-        field: this.getFilterKey(this.payload.filterParams.category), // TODO: change this back to 'formData.tt_categories.value.identifier'
+        field: 'formData.tt_categories.value.label',
         operator: ComparisonQueryOperatorEnum.EQUALS,
         value: this.payload.filterParams.category
       })

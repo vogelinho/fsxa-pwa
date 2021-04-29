@@ -11,7 +11,7 @@ on:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
-  release:
+  build:
     # Only release on push to master
     if: github.event_name == 'push'
     runs-on: ubuntu-latest
@@ -33,7 +33,14 @@ jobs:
         FSXA_MODE: preview
         FSXA_API_KEY: API_KEY
         FSXA_CAAS: FSXA_CAAS
+        FSXA_MODE: FSXA_MODE
         FSXA_NAVIGATION_SERVICE: FSXA_NAVIGATION_SERVICE
         FSXA_LOCALE: FSXA_LOCALE
         FSXA_TENANT_ID: FSXA_TENANT_ID
         FSXA_PROJECT_ID: FSXA_PROJECT_ID
+
+    - name: Deploy 🚀
+      uses: JamesIves/github-pages-deploy-action@4.1.1
+      with:
+        branch: pages # The branch the action should deploy to.
+        folder: dist # The folder the action should deploy.

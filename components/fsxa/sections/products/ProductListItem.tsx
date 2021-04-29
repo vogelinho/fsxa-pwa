@@ -1,6 +1,6 @@
 import { FSXABaseSection } from 'fsxa-pattern-library'
 import { Component } from 'vue-property-decorator'
-import { ProductListItem as UIProductListItem } from 'fsxa-ui'
+import { ImageRef, ProductListItem as UIProductListItem } from 'fsxa-ui'
 
 export interface Payload {
   tt_name: string

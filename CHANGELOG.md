@@ -1,24 +1,3 @@
-# [1.2.0](https://github.com/e-Spirit/fsxa-pwa/compare/v1.1.0...v1.2.0) (2021-03-16)
-
-
-### Features
-
-* TNG-733 Add simple InteractiveYouTubeVideo component ([#13](https://github.com/e-Spirit/fsxa-pwa/issues/13)) ([ad026b9](https://github.com/e-Spirit/fsxa-pwa/commit/ad026b925be467b72ab85e4d9fe105fdf38dca78))
-
-# [1.1.0](https://github.com/e-Spirit/fsxa-pwa/compare/v1.0.3...v1.1.0) (2021-03-15)
-
-
-### Features
-
-* Upgraded fsxa-api, fsxa-ui, fsxa-pattern-library and fsxa-nuxt-module ([#12](https://github.com/e-Spirit/fsxa-pwa/issues/12)) ([8a5515a](https://github.com/e-Spirit/fsxa-pwa/commit/8a5515a72386ab22779a11d89d426d0903c813d0))
-
-## [1.0.3](https://github.com/e-Spirit/fsxa-pwa/compare/v1.0.2...v1.0.3) (2021-03-12)
-
-
-### Bug Fixes
-
-* **product list view:** fixed an issue where product category filtering only worked in german ([bc28092](https://github.com/e-Spirit/fsxa-pwa/commit/bc2809269f891ceb791bf0e74b570dc7c54a2f5a))
-
 ## [1.0.2](https://github.com/e-Spirit/fsxa-pwa/compare/v1.0.1...v1.0.2) (2021-03-03)
 
 

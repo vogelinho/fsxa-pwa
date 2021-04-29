@@ -1,6 +1,6 @@
 {
   "name": "fsxa-pwa",
-  "version": "1.2.0",
+  "version": "0.0.2",
   "description": "Demo PWA built with FSXA",
   "license": "Apache-2.0",
   "private": true,
@@ -9,14 +9,14 @@
     "build": "nuxt-ts build",
     "generate": "nuxt-ts generate",
     "start": "nuxt-ts start",
-    "lint": "eslint --ext .js,.vue,.ts,.tsx --ignore-path .gitignore .",
+    "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
     "test": "jest",
     "commit": "git-cz",
     "commitmsg": "commitlint -E HUSKY_GIT_PARAMS",
     "semantic-release": "semantic-release"
   },
   "lint-staged": {
-    "*.{js,vue,ts,tsx}": "npm run lint"
+    "*.{js,vue}": "npm run lint"
   },
   "husky": {
     "hooks": {
@@ -24,17 +24,17 @@
     }
   },
   "dependencies": {
+    "@nuxt/types": "^0.7.9",
     "@nuxt/typescript-runtime": "^0.4.0",
     "@nuxtjs/axios": "^5.3.6",
     "@nuxtjs/dotenv": "^1.4.0",
     "@nuxtjs/pwa": "^3.0.0-0",
-    "@tailwindcss/aspect-ratio": "^0.2.0",
     "consola": "^2.15.0",
     "core-js": "^2.6.10",
-    "fsxa-api": "^5.1.0",
-    "fsxa-nuxt-module": "^3.2.0",
-    "fsxa-pattern-library": "^3.1.0",
-    "fsxa-ui": "^4.0.1",
+    "fsxa-api": "^5.1.1",
+    "fsxa-nuxt-module": "^3.3.0-alpha.6",
+    "fsxa-pattern-library": "^4.0.0-alpha.2",
+    "fsxa-ui": "^4.1.0-alpha.1",
     "lodash.get": "^4.4.2",
     "nuxt": "^2.0.0",
     "tailwindcss": "^1.9.6"
