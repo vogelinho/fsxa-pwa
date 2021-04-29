@@ -39,7 +39,7 @@ jobs:
         FSXA_TENANT_ID: FSXA_TENANT_ID
         FSXA_PROJECT_ID: FSXA_PROJECT_ID
 
-    - name: Deploy 🚀
+    - name: Deploy
       uses: JamesIves/github-pages-deploy-action@4.1.1
       with:
         branch: pages # The branch the action should deploy to.
