@@ -1,4 +1,4 @@
-import { FSXABaseAppLayout, FSXAGetters } from 'fsxa-pattern-library'
+import { FSXABaseAppLayout, FSXAGetters, FSXALink } from 'fsxa-pattern-library'
 import {
   Loader,
   Navigation,
@@ -45,10 +45,6 @@ class AppLayout extends FSXABaseAppLayout {
       : []
   }
 
-  get logoUrl() {
-    return this.globalSettings?.data.ps_logo.resolutions.ORIGINAL.url
-  }
-
   getLangNavItem(isMobile: boolean): FirstLevelNavigationItem {
     return {
       key: 'language',
@@ -72,14 +68,14 @@ class AppLayout extends FSXABaseAppLayout {
       ),
       children: [
         {
-          key: 'language.de',
+          key: 'de_DE',
           label:
             this.globalSettings?.data.label_language_german ||
             getFallbackTranslation([this.locale, 'language', 'de_DE']),
           path: '#'
         },
         {
-          key: 'language.en',
+          key: 'en_GB',
           label:
             this.globalSettings?.data.label_language_english ||
             getFallbackTranslation([this.locale, 'language', 'en_GB']),
@@ -90,10 +86,14 @@ class AppLayout extends FSXABaseAppLayout {
     }
   }
 
+  get logoUrl() {
+    return this.globalSettings?.data.gs_logo?.resolutions.ORIGINAL.url || ''
+  }
+
   handleNavigationClick(item: NavigationItem) {
     if (['language.de', 'language.en'].includes(item.key as string)) {
       this.triggerRouteChange({
-        pageId: this.currentPage?.id,
+        pageId: this.currentPage?.item.id,
         locale: item.key === 'language.de' ? 'de_DE' : 'en_GB'
       })
     } else {
@@ -108,7 +108,7 @@ class AppLayout extends FSXABaseAppLayout {
     const items = [...this.navigationItems]
     // Each NavigationItem contains an array of parentIds. This helps us construct the activeItemKeys for the Navigation components
     const activeItemKeys = this.currentPage
-      ? [...this.currentPage.parentIds, this.currentPage.id]
+      ? [...this.currentPage.item.parentIds, this.currentPage.item.id]
       : []
     return ['initializing', 'not_initialized'].includes(this.appState) ? (
       <Loader />
@@ -123,7 +123,7 @@ class AppLayout extends FSXABaseAppLayout {
             overlay: () =>
               this.showMobileNavigation ? (
                 <MobileNavigation
-                  items={[...items, this.getLangNavItem(true)]}
+                  items={items}
                   activeItemKeys={activeItemKeys}
                   onItemClicked={this.handleNavigationClick}
                 />
@@ -150,6 +150,22 @@ class AppLayout extends FSXABaseAppLayout {
                 items={[...items, this.getLangNavItem(false)]}
                 activeItemKeys={activeItemKeys}
                 onItemClicked={this.handleNavigationClick}
+                scopedSlots={{
+                  children: (item) => (
+                    <FSXALink
+                      class="ui-block ui-px-5 ui-py-2 ui-bg-white hover:ui-bg-gray-200 ui-text-xs"
+                      datasetId={this.currentPage?.datasetId}
+                      pageId={this.currentPage?.item.id}
+                      nextLocale={
+                        item.key === 'de_DE' || item.key === 'en_GB'
+                          ? item.key
+                          : ''
+                      }
+                    >
+                      {item.label}
+                    </FSXALink>
+                  )
+                }}
               />
             </div>
             <a
@@ -175,7 +191,7 @@ class AppLayout extends FSXABaseAppLayout {
             </a>
           </div>
         </PageHeader>
-        <div class="w-full h-64 bg-gray-100 flex items-center text-xs fixed bottom-0 left-0 px-4 md:px-16 lg:px-20 xl:px-24">
+        <div class="w-full h-64 bg-gray-100 flex items-center text-xs fixed bottom-0 left-0 px-4 md:px-16 lg:px-20 xl:px-24 ">
           <div class="w-1/3 flex items-center justify-start">
             <a
               href={this.navigationData?.pages.index}
@@ -193,34 +209,30 @@ class AppLayout extends FSXABaseAppLayout {
             </a>
           </div>
           <div class="w-1/3 flex items-center justify-center">
-            © {this.globalSettings?.data.ps_footer.gc_copyright}
+            © {this.globalSettings?.data.gc_copyright}
           </div>
           <div class="w-1/3 flex items-center justify-end gap-2">
-            {this.globalSettings?.data.ps_footer.gc_linklist.map(
-              (link: any) => (
-                <a
-                  href={
-                    this.getUrlByPageId(link.data.lt_link.referenceId) || '#'
-                  }
-                  class={`text-xs hover:underline ${
-                    this.currentPage?.id === link.data.lt_link.referenceId
-                      ? 'text-gray-600'
-                      : ''
-                  }`}
-                  onClick={(event: MouseEvent) => {
-                    event.preventDefault()
-                    this.triggerRouteChange({
-                      pageId: link.data.lt_link.referenceId
-                    })
-                  }}
-                >
-                  {link.data.lt_text}
-                </a>
-              )
-            )}
+            {this.globalSettings?.data?.gc_linklist?.map((link: any) => (
+              <a
+                href={this.getUrlByPageId(link.data.lt_link.referenceId) || '#'}
+                class={`text-xs hover:underline ${
+                  this.currentPage?.item.id === link.data.lt_link.referenceId
+                    ? 'text-gray-600'
+                    : ''
+                }`}
+                onClick={(event: MouseEvent) => {
+                  event.preventDefault()
+                  this.triggerRouteChange({
+                    pageId: link.data.lt_link.referenceId
+                  })
+                }}
+              >
+                {link.data.lt_text}
+              </a>
+            ))}
           </div>
         </div>
-        <div class="bg-white relative">{this.$slots.default}</div>
+        {this.$slots.default}
       </div>
     )
   }

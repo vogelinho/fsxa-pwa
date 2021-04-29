@@ -22,7 +22,7 @@ interface HeaderSectionPayload {
 class StandardLayout extends FSXABaseLayout<HeaderSectionPayload> {
   head() {
     return {
-      title: this.currentPage?.label
+      title: this.currentPage?.item.label
     }
   }
 
@@ -31,7 +31,7 @@ class StandardLayout extends FSXABaseLayout<HeaderSectionPayload> {
   }
 
   get breadcrumbs() {
-    const indexPage: NavigationItem = this.navigationData.idMap[
+    const indexPage: NavigationItem = this.navigationData?.idMap[
       this.navigationData.seoRouteMap[this.navigationData.pages.index]
     ]
     const breadcrumbs: Breadcrumb[] = [
@@ -43,8 +43,8 @@ class StandardLayout extends FSXABaseLayout<HeaderSectionPayload> {
       }
     ]
     if (this.currentPage) {
-      this.currentPage.parentIds.forEach((parentId) => {
-        const page = this.navigationData.idMap[parentId]
+      this.currentPage.item.parentIds.forEach((parentId) => {
+        const page = this.navigationData?.idMap[parentId]
         breadcrumbs.push({
           label: page.label || '',
           path: page.seoRoute,
@@ -52,11 +52,11 @@ class StandardLayout extends FSXABaseLayout<HeaderSectionPayload> {
           referenceType: 'PageRef'
         })
       })
-      if (this.currentPage.parentIds.length === 0) {
+      if (this.currentPage.item.parentIds.length === 0) {
         breadcrumbs.push({
-          label: this.currentPage.label,
-          path: this.currentPage.seoRoute,
-          referenceId: this.currentPage.id,
+          label: this.currentPage.item.label,
+          path: this.currentPage.route,
+          referenceId: this.currentPage.item.id,
           referenceType: 'PageRef'
         })
       }
